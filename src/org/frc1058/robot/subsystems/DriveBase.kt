@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Subsystem
 import org.frc1058.robot.RobotMap
 import org.frc1058.robot.commands.DriveSplitArcade
 
-public class DriveBase() : Subsystem(){
+public object DriveBase : Subsystem(){
 	
 	var driveBaseMode: Int = 0;
 	
@@ -47,7 +47,7 @@ public class DriveBase() : Subsystem(){
 		l1.setFeedbackDevice(com.ctre.CANTalon.FeedbackDevice.QuadEncoder);
 		r1.setFeedbackDevice(com.ctre.CANTalon.FeedbackDevice.QuadEncoder);
 		when (mode){
-			0 -> {
+			0 ->{
 				 l1.changeControlMode(com.ctre.CANTalon.TalonControlMode.PercentVbus);
 		         l2.changeControlMode(com.ctre.CANTalon.TalonControlMode.Follower);
 		         r1.changeControlMode(com.ctre.CANTalon.TalonControlMode.PercentVbus);
@@ -58,7 +58,7 @@ public class DriveBase() : Subsystem(){
 		         l2.enableBrakeMode(false);
 		         r2.enableBrakeMode(false);
 			}
-			1 -> {
+			1 ->{
 				 l1.changeControlMode(com.ctre.CANTalon.TalonControlMode.Speed);
 				 r1.changeControlMode(com.ctre.CANTalon.TalonControlMode.Follower);
 				 l2.changeControlMode(com.ctre.CANTalon.TalonControlMode.Speed);
@@ -68,7 +68,7 @@ public class DriveBase() : Subsystem(){
 				 l1.configMaxOutputVoltage(12.0);
 				 r1.configMaxOutputVoltage(12.0);
 			}
-			2 -> {
+			2 ->{
 				 l1.changeControlMode(com.ctre.CANTalon.TalonControlMode.Position);
 				 l2.changeControlMode(com.ctre.CANTalon.TalonControlMode.Follower);
 				 r1.changeControlMode(com.ctre.CANTalon.TalonControlMode.Position);
@@ -86,12 +86,30 @@ public class DriveBase() : Subsystem(){
 			
 			else -> {
 				 println("Invalid DriveBase mode, you big lame-O.");
-			}
-				
-				
+			}			
 		}
 	}
-		
-		
+	public fun driveTank(left:Double, right:Double){
+		when(driveBaseMode){
+			0 ->{
+				l1.set(left);
+				l2.set(left);
+				r1.set(-right)
+				r2.set(-right)
+			}
+			1 ->{
+				l1.setSetpoint(left*60);
+				l2.setSetpoint(left*60);
+				r1.setSetpoint(-right*60);
+				r2.setSetpoint(-right*60);
+			}
+			2 ->{
+				l1.setSetpoint(left);
+				l2.setSetpoint(left);
+				r1.setSetpoint(right);
+				r2.setSetpoint(right);
+			}
+		}
+	}	
 }
 	

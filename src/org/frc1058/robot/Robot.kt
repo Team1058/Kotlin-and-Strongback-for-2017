@@ -5,10 +5,11 @@ import org.frc1058.robot.subsystems.DriveBase;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 
-public class Robot() : IterativeRobot() {
+public object Robot : IterativeRobot() {
 	
-	public final val drivebase = DriveBase();
-    
+	public val oi = OI();
+    public object driveBase = DriveBase;
+	
     override public fun robotInit() {
     }
 
