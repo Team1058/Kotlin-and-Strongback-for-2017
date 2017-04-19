@@ -16,7 +16,11 @@ class DriveSplitArcade() : Command(){
     // Called just before this Command runs the first time
     override protected fun initialize() {
 		requires(Robot.driveBase);
+<<<<<<< HEAD
 		Robot.driveBase.changeMode(DriveBase.DriveBaseMode.PERCENTVBUS);
+=======
+		Robot.driveBase.changeMode(0);
+>>>>>>> 2bccc44e04dfc6ec003ce6df2f1ed316df381906
     }
 
     // Called repeatedly when this Command is scheduled to run
