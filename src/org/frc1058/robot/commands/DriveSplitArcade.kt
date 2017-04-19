@@ -13,8 +13,8 @@ class DriveSplitArcade() : Command(){
 	
     // Called just before this Command runs the first time
     override protected fun initialize() {
-		requires(DriveBase);
-		DriveBase.initDriveBase(0);
+		requires(Robot.driveBase);
+		Robot.driveBase.changeMode(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -41,7 +41,7 @@ class DriveSplitArcade() : Command(){
 			right *= .5;
 		}
 		
-		DriveBase.driveTank(left,right);
+		Robot.driveBase.driveTank(left,right);
 		
     }
 

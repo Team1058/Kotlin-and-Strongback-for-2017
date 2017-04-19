@@ -20,38 +20,50 @@ public object DriveBase : Subsystem(){
 	val gearLed = Solenoid(RobotMap.GEAR_LED_RING_CHANNEL);
 	val shooterLed = Solenoid(RobotMap.SHOOTER_LED_RING_CHANNEL);
 	
+	
 	override public fun initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
 		DriveSplitArcade();
     }
 	
-	public fun initDriveBase(mode : Int){
+	public fun initDriveBase(){
+		with(l1){
+			setSafetyEnabled(false);
+			enableControl();
+			reverseSensor(true);
+			configEncoderCodesPerRev(256);
+			setFeedbackDevice(com.ctre.CANTalon.FeedbackDevice.QuadEncoder);
+		}
+		with(r1){
+			setSafetyEnabled(false);
+			enableControl();
+			reverseSensor(true);
+			configEncoderCodesPerRev(256);
+			setFeedbackDevice(com.ctre.CANTalon.FeedbackDevice.QuadEncoder);
+		}
+		with(l2){
+			setSafetyEnabled(false);
+			changeControlMode(com.ctre.CANTalon.TalonControlMode.Follower);
+		}
+		with(r2){
+			setSafetyEnabled(false);
+			changeControlMode(com.ctre.CANTalon.TalonControlMode.Follower);
+		}	
+	}
+	
+	public fun changeMode(mode : Int){
 		
 		driveBaseMode = mode;
 		
-		l1.setSafetyEnabled(false);
-		r1.setSafetyEnabled(false);
+		
 		l2.setSafetyEnabled(false);
 		r2.setSafetyEnabled(false);
 		
-		l1.enableControl();
-		r1.enableControl();
-		
-		l1.reverseSensor(true);
-		r1.reverseSensor(true);
-		
-		l1.configEncoderCodesPerRev(256);
-		r1.configEncoderCodesPerRev(256);
-		
-		l1.setFeedbackDevice(com.ctre.CANTalon.FeedbackDevice.QuadEncoder);
-		r1.setFeedbackDevice(com.ctre.CANTalon.FeedbackDevice.QuadEncoder);
 		when (mode){
 			0 ->{
 				 l1.changeControlMode(com.ctre.CANTalon.TalonControlMode.PercentVbus);
-		         l2.changeControlMode(com.ctre.CANTalon.TalonControlMode.Follower);
 		         r1.changeControlMode(com.ctre.CANTalon.TalonControlMode.PercentVbus);
-		         r2.changeControlMode(com.ctre.CANTalon.TalonControlMode.Follower);
 				
 				 l1.enableBrakeMode(false);
 		         r1.enableBrakeMode(false);
@@ -60,9 +72,7 @@ public object DriveBase : Subsystem(){
 			}
 			1 ->{
 				 l1.changeControlMode(com.ctre.CANTalon.TalonControlMode.Speed);
-				 r1.changeControlMode(com.ctre.CANTalon.TalonControlMode.Follower);
 				 l2.changeControlMode(com.ctre.CANTalon.TalonControlMode.Speed);
-				 r2.changeControlMode(com.ctre.CANTalon.TalonControlMode.Follower);
 				 l1.setPID(RobotMap.DRIVEBASE_kP, RobotMap.DRIVEBASE_kI, RobotMap.DRIVEBASE_kD, RobotMap.DRIVEBASE_kF, 0, 0.0, 0);
 				 r1.setPID(RobotMap.DRIVEBASE_kP, RobotMap.DRIVEBASE_kI, RobotMap.DRIVEBASE_kD, RobotMap.DRIVEBASE_kF, 0, 0.0, 0);
 				 l1.configMaxOutputVoltage(12.0);
@@ -70,9 +80,7 @@ public object DriveBase : Subsystem(){
 			}
 			2 ->{
 				 l1.changeControlMode(com.ctre.CANTalon.TalonControlMode.Position);
-				 l2.changeControlMode(com.ctre.CANTalon.TalonControlMode.Follower);
 				 r1.changeControlMode(com.ctre.CANTalon.TalonControlMode.Position);
-				 r2.changeControlMode(com.ctre.CANTalon.TalonControlMode.Follower);
 				
 				 //TODO: FIX THIS GARBAGE
 				 //WHY ARE THE P AND I VALUES DIFFERENT

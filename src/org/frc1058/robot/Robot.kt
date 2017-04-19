@@ -7,10 +7,11 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 
 public object Robot : IterativeRobot() {
 	
-	public val oi = OI();
-    public object driveBase = DriveBase;
+	public val oi = OI;
+    public val driveBase = DriveBase;
 	
     override public fun robotInit() {
+		driveBase.initDriveBase();
     }
 
     override public fun teleopInit() {
