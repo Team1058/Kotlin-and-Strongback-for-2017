@@ -2,7 +2,9 @@ package org.frc1058.robot.commands
 
 import edu.wpi.first.wpilibj.command.Command
 import org.frc1058.robot.subsystems.DriveBase
+import org.frc1058.robot.GamepadHelper
 import org.frc1058.robot.Robot
+
 
 class DriveSplitArcade() : Command(){
 	
@@ -13,8 +15,8 @@ class DriveSplitArcade() : Command(){
 	
     // Called just before this Command runs the first time
     override protected fun initialize() {
-		requires(DriveBase);
-		DriveBase.initDriveBase(0);
+		requires(Robot.driveBase);
+		Robot.driveBase.changeMode(DriveBase.DriveBaseMode.PERCENTVBUS);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -23,15 +25,9 @@ class DriveSplitArcade() : Command(){
 		var speed : Double = 0.0;
 		var left : Double;
 		var right : Double;
-		val deadband : Double = .15;
 		
-		if(Math.abs(Robot.oi.driverGamepad.getRightStickX()) > deadband){
-			rotation = Robot.oi.driverGamepad.getRightStickX();
-		}
-		
-		if(Math.abs(Robot.oi.driverGamepad.getLeftStickY()) > deadband){
-			speed = Robot.oi.driverGamepad.getLeftStickY();
-		}
+		rotation = GamepadHelper.ValueWithDeadBand(Robot.oi.driverGamepad.getRightStickX());
+		speed = GamepadHelper.ValueWithDeadBand(Robot.oi.driverGamepad.getLeftStickY());
 		
 		left = speed + rotation;
 		right = speed - rotation;
@@ -41,7 +37,7 @@ class DriveSplitArcade() : Command(){
 			right *= .5;
 		}
 		
-		DriveBase.driveTank(left,right);
+		Robot.driveBase.driveTank(left,right);
 		
     }
 

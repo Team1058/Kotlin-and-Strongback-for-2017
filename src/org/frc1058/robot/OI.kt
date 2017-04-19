@@ -2,7 +2,7 @@ package org.frc1058.robot
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-public class OI {
+public object OI {
 	
 	public val driverGamepad =  Gamepad(0);
 	public val operatorGamepad = Gamepad(1);
