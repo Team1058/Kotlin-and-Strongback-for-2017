@@ -3,20 +3,20 @@ package org.frc1058.robot.commands
 import edu.wpi.first.wpilibj.command.Command
 import org.frc1058.robot.subsystems.DriveBase
 import org.frc1058.robot.GamepadHelper
-import org.frc1058.robot.Robot
+import org.frc1058.robot.OI
 
 
-class DriveSplitArcade() : Command(){
+class DriveSplitArcade : Command{
 	
-	public fun DriveSplitArcade() {
+	public constructor() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+		requires(DriveBase);
     }
 	
     // Called just before this Command runs the first time
     override protected fun initialize() {
-		requires(Robot.driveBase);
-		Robot.driveBase.changeMode(DriveBase.DriveBaseMode.PERCENTVBUS);
+		DriveBase.changeMode(DriveBase.DriveBaseMode.PERCENTVBUS);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -26,18 +26,18 @@ class DriveSplitArcade() : Command(){
 		var left : Double;
 		var right : Double;
 		
-		rotation = GamepadHelper.ValueWithDeadBand(Robot.oi.driverGamepad.getRightStickX());
-		speed = GamepadHelper.ValueWithDeadBand(Robot.oi.driverGamepad.getLeftStickY());
+		rotation = GamepadHelper.ValueWithDeadBand(OI.driverGamepad.getRightStickX());
+		speed = GamepadHelper.ValueWithDeadBand(OI.driverGamepad.getLeftStickY());
 		
 		left = speed + rotation;
 		right = speed - rotation;
 
-		if(Robot.oi.driverGamepad.getLeftBumper() == true){
+		if(OI.driverGamepad.getLeftBumper() == true){
         	left *= .5;
 			right *= .5;
 		}
 		
-		Robot.driveBase.driveTank(left,right);
+		DriveBase.driveTank(left,right);
 		
     }
 
