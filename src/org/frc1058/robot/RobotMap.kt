@@ -44,10 +44,10 @@ public object RobotMap {
 	public val DRIVEBASE_COUNTS_PER_REV = 256;
 		
 	//POSITIONS
-	public val INTAKE_PIVOT_STOW_POSITION = 0;
-	public val INTAKE_PIVOT_VERTICAL_POSITION = 1600;
-	public val INTAKE_PIVOT_GEARINTAKE_POSITION = 3795;
-	public val INTAKE_PIVOT_BALLINTAKE_POSITION = 982;
+	public val INTAKE_PIVOT_STOW_POSITION = 0.0;
+	public val INTAKE_PIVOT_VERTICAL_POSITION = 1600.0;
+	public val INTAKE_PIVOT_GEARINTAKE_POSITION = 3795.0;
+	public val INTAKE_PIVOT_BALLINTAKE_POSITION = 982.0;
 	
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:

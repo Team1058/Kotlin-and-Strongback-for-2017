@@ -57,5 +57,9 @@ public object GearManipulator: Subsystem() {
     	pivotMotor.set(output);
     }
 	
+	public fun setRollerSpeed(speed: Double){
+		rollerMotor.set(speed);
+	}
+	
 	
 }
