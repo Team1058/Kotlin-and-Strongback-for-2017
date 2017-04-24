@@ -21,7 +21,7 @@ public class PivotGearIntake : Command {
 	}
 	
 	override protected fun execute() {
-		if(GearManipulator.pivotMotor.getPosition() < (intakeSetpoint-RobotMap.DRIVEBASE_POSITION_TOLERANCE) && GearManipulator.pivotMotor.getPosition() > (intakeSetpoint+RobotMap.DRIVEBASE_POSITION_TOLERANCE)){
+		if(GearManipulator.pivotMotor.getPosition() < intakeSetpoint-RobotMap.DRIVEBASE_POSITION_TOLERANCE && GearManipulator.pivotMotor.getPosition() > intakeSetpoint+RobotMap.DRIVEBASE_POSITION_TOLERANCE){
     		onTarget = true;
     	}
 	}

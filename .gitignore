@@ -12,3 +12,4 @@
 hs_err_pid*
 src/org/frc1058/robot/commands/BaseCommand.kt
 src/org/frc1058/robot/commands/test.java
+src/org/frc1058/robot/subsystems/BaseSubsystem.kt

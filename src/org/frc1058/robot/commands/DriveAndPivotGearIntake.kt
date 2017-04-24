@@ -20,10 +20,11 @@ public class DriveAndPivotGearIntake: Command {
 	
 	override protected fun initialize() {
 		GearManipulator.setMaxIntakeSpeed(maxVoltage);
-		GearManipulator.setIntakePosition(intakeSetpoint);
+		
 	}
 	
 	override protected fun execute() {
+		GearManipulator.setIntakePosition(intakeSetpoint);
 		if(!OI.operatorGamepad.getRightAxisButton()){
 			GearManipulator.setRollerSpeed(rollerSpeed);
     	}
