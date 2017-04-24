@@ -11,3 +11,4 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 src/org/frc1058/robot/commands/BaseCommand.kt
+src/org/frc1058/robot/commands/test.java

@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.frc1058.robot.subsystems.GearManipulator;
 
 
-public class DriveGearRoller: Command {
+public class DriveGearIntake: Command {
 	
 	var rollerSpeed: Double = 0.0;
 	
