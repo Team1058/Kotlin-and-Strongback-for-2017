@@ -1,6 +1,7 @@
 package org.frc1058.robot.commands
 
 import edu.wpi.first.wpilibj.command.Command
+import org.frc1058.robot.ControllerModes
 import org.frc1058.robot.subsystems.DriveBase
 import org.frc1058.robot.GamepadHelper
 import org.frc1058.robot.OI
@@ -16,7 +17,7 @@ class DriveSplitArcade : Command{
 	
     // Called just before this Command runs the first time
     override protected fun initialize() {
-		DriveBase.changeMode(DriveBase.DriveBaseMode.PERCENTVBUS);
+		DriveBase.changeMode(ControllerModes.PERCENTVBUS);
     }
 
     // Called repeatedly when this Command is scheduled to run

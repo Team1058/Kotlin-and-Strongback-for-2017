@@ -1,6 +1,7 @@
 package org.frc1058.robot;
 
 import org.strongback.Strongback;
+import org.frc1058.robot.ControllerModes
 import org.frc1058.robot.subsystems.DriveBase;
 import org.frc1058.robot.subsystems.GearManipulator;
 
@@ -21,7 +22,7 @@ public object Robot : IterativeRobot() {
     override public fun teleopInit() {
         // Start Strongback functions ...
         Strongback.start();
-		DriveBase.changeMode(DriveBase.DriveBaseMode.SPEEDPID);
+		DriveBase.changeMode(ControllerModes.PID);
     }
     
     override public fun teleopPeriodic() {

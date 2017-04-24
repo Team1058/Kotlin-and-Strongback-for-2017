@@ -1,17 +1,14 @@
 package org.frc1058.robot.subsystems
 
 import edu.wpi.first.wpilibj.command.Subsystem
+import org.frc1058.robot.ControllerModes
 import org.frc1058.robot.RobotMap
 import org.frc1058.robot.OI
 import com.ctre.CANTalon
 
 public object GearManipulator: Subsystem() {
 	
-	public enum class GearManipulatorMode{
-		PID, PERCENTVBUS
-	}
-	
-	var currentMode : GearManipulatorMode = GearManipulatorMode.PID;
+	var currentMode : ControllerModes = ControllerModes.PID;
 	val pivotMotor =  CANTalon(RobotMap.GEAR_MANIPULATOR_PIVOT_TALON_ID);
 	val rollerMotor =  CANTalon(RobotMap.GEAR_MANIPULATOR_PIVOT_TALON_ID);
 	
@@ -19,13 +16,13 @@ public object GearManipulator: Subsystem() {
 		//setDefaultCommand();
 	}
 	
-	public fun initPivotMotor(mode: GearManipulatorMode = currentMode){
+	public fun initPivotMotor(mode: ControllerModes = currentMode){
 		with(pivotMotor){
 			setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 			changeControlMode(CANTalon.TalonControlMode.Position);
 		}
 		when(mode){
-			GearManipulatorMode.PID->{
+			ControllerModes.PID, ControllerModes.ENCODERS->{
 				with(pivotMotor){
 					setPID(RobotMap.GEAR_MANIPULATOR_kP,RobotMap.GEAR_MANIPULATOR_kI, RobotMap.GEAR_MANIPULATOR_kP)
 					enableControl();
@@ -34,7 +31,7 @@ public object GearManipulator: Subsystem() {
 					setForwardSoftLimit(0.0);
 				}	
 			}
-			GearManipulatorMode.PERCENTVBUS->{
+			ControllerModes.PERCENTVBUS->{
 				with(pivotMotor){
 					changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 				}
@@ -60,6 +57,4 @@ public object GearManipulator: Subsystem() {
 	public fun setRollerSpeed(speed: Double){
 		rollerMotor.set(speed);
 	}
-	
-	
 }

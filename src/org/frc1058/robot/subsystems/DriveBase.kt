@@ -6,12 +6,10 @@ import edu.wpi.first.wpilibj.Solenoid
 import edu.wpi.first.wpilibj.command.Subsystem
 import org.frc1058.robot.RobotMap
 import org.frc1058.robot.commands.DriveSplitArcade
+import org.frc1058.robot.ControllerModes
 
 public object DriveBase : Subsystem(){
 	
-	public enum class DriveBaseMode{
-		PERCENTVBUS, SPEEDPID, ENCODERS
-	}
 	val l1 = CANTalon(RobotMap.LEFT_DRIVE_1_TALON_ID);
 	val r1 = CANTalon(RobotMap.RIGHT_DRIVE_1_TALON_ID);
 	val l2 = CANTalon(RobotMap.LEFT_DRIVE_2_TALON_ID);
@@ -21,7 +19,7 @@ public object DriveBase : Subsystem(){
 	val gearLed = Solenoid(RobotMap.GEAR_LED_RING_CHANNEL);
 	val shooterLed = Solenoid(RobotMap.SHOOTER_LED_RING_CHANNEL);
 
-	var currentMode: DriveBaseMode = DriveBaseMode.PERCENTVBUS;
+	var currentMode: ControllerModes = ControllerModes.PERCENTVBUS;
 	
 	
 	override public fun initDefaultCommand() {
@@ -55,9 +53,9 @@ public object DriveBase : Subsystem(){
 		}	
 	}
 
-	public fun changeMode(mode: DriveBaseMode){
+	public fun changeMode(mode: ControllerModes){
 		when (mode){
-			DriveBaseMode.PERCENTVBUS ->{
+			ControllerModes.PERCENTVBUS ->{
 				with(l1){
 					changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 					enableBrakeMode(false);
@@ -69,7 +67,7 @@ public object DriveBase : Subsystem(){
 		        l2.enableBrakeMode(false);
 		        r2.enableBrakeMode(false);
 			}
-			DriveBaseMode.SPEEDPID ->{
+			ControllerModes.PID ->{
 				with(l1){
 					 changeControlMode(CANTalon.TalonControlMode.Speed);
 					 setPID(RobotMap.DRIVEBASE_kP, RobotMap.DRIVEBASE_kI, RobotMap.DRIVEBASE_kD, RobotMap.DRIVEBASE_kF, 0, 0.0, 0);
@@ -81,7 +79,7 @@ public object DriveBase : Subsystem(){
 					configMaxOutputVoltage(12.0);
 				}
 			}
-			DriveBaseMode.ENCODERS ->{
+			ControllerModes.ENCODERS ->{
 				with(l1){
 					changeControlMode(CANTalon.TalonControlMode.Position);
 					//TODO: FIX THIS GARBAGE
@@ -101,19 +99,19 @@ public object DriveBase : Subsystem(){
 	}
 	public fun driveTank(left:Double, right:Double){
 		when(currentMode){
-			DriveBaseMode.PERCENTVBUS ->{
+			ControllerModes.PERCENTVBUS ->{
 				l1.set(left);
 				l2.set(left);
 				r1.set(-right)
 				r2.set(-right)
 			}
-			DriveBaseMode.SPEEDPID ->{
+			ControllerModes.PID ->{
 				l1.setSetpoint(left*60);
 				l2.setSetpoint(left*60);
 				r1.setSetpoint(-right*60);
 				r2.setSetpoint(-right*60);
 			}
-			DriveBaseMode.ENCODERS ->{
+			ControllerModes.ENCODERS ->{
 				l1.setSetpoint(left);
 				l2.setSetpoint(left);
 				r1.setSetpoint(right);
