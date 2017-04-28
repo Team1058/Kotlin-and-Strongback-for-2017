@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.command.Subsystem
 import org.frc1058.robot.ControllerModes
 import org.frc1058.robot.RobotMap
 import org.frc1058.robot.OI
+import org.frc1058.robot.commands.PivotJoystickPID
 import com.ctre.CANTalon
 
 public object GearManipulator: Subsystem() {
@@ -13,7 +14,8 @@ public object GearManipulator: Subsystem() {
 	val rollerMotor =  CANTalon(RobotMap.GEAR_MANIPULATOR_PIVOT_TALON_ID);
 	
 	override public fun initDefaultCommand() {
-		//setDefaultCommand();
+		initPivotMotor(ControllerModes.PID);
+		setDefaultCommand(PivotJoystickPID(RobotMap.INTAKE_PIVOT_VERTICAL_POSITION, 6.0));
 	}
 	
 	public fun initPivotMotor(mode: ControllerModes = currentMode){

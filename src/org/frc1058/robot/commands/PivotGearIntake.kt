@@ -10,7 +10,7 @@ public class PivotGearIntake : Command {
 	var intakeSetpoint: Double = 0.0;
 	var onTarget: Boolean = false;
 	
-	public constructor(setpoint: Double, voltage: Double){
+	public constructor(setpoint: Double, voltage: Double = 6.0){
 		requires(GearManipulator);
     	maxVoltage = voltage;
     	intakeSetpoint = setpoint;

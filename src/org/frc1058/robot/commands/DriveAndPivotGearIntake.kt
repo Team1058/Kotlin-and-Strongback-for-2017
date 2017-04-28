@@ -11,7 +11,7 @@ public class DriveAndPivotGearIntake: Command {
 	var intakeSetpoint: Double = 0.0;
 	var maxVoltage: Double = 0.0;
 	
-	public constructor(setpoint: Double, speed: Double, voltage: Double = 12.0){
+	public constructor(setpoint: Double, speed: Double, voltage: Double = 6.0){
 		requires(GearManipulator);
     	rollerSpeed = speed;
     	intakeSetpoint = setpoint;
@@ -20,7 +20,6 @@ public class DriveAndPivotGearIntake: Command {
 	
 	override protected fun initialize() {
 		GearManipulator.setMaxIntakeSpeed(maxVoltage);
-		
 	}
 	
 	override protected fun execute() {
