@@ -84,40 +84,11 @@ class Gamepad : edu.wpi.first.wpilibj.Joystick{
 		return getRawButton(RobotMap.backButton);
 	}
 	
-	public fun getDpadUp(): Boolean {
-		//return(getPOV(0) == 0) ? true : false);
-		if(getPOV(0)==0){
-			return true;
-		}
-		else{
-			return false;	
-		}
-	}
+	public fun getDpadUp() = getPOV(0)== 0;
 	
-	public fun getDpadRight(): Boolean {
-		if(getPOV(90)==0){
-			return true;
-		}
-		else{
-			return false;	
-		}
-	}
+	public fun getDpadRight() = getPOV(90)==0;
 	
-	public fun getDpadDown(): Boolean {
-		if(getPOV(180)==0){
-			return true;
-		}
-		else{
-			return false;	
-		}
-	}
+	public fun getDpadDown() = getPOV(180)==0;
 
-	public fun getDpadLeft(): Boolean {
-		if(getPOV(270)==0){
-			return true;
-		}
-		else{
-			return false;	
-		}
-	}	
+	public fun getDpadLeft() = getPOV(270)==0;
 }
