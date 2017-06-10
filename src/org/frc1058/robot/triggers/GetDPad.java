@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.buttons.*;
 /**
  * Gamepad DPadUp support
  */
-public class GetDPad extends Trigger {
-	private Joystick joy;
-	private double m_degrees;
+class GetDPad extends Trigger {
+	private final Joystick joy;
+	private final double m_degrees;
 	
 	public GetDPad(Joystick joy, double degrees) {
 		this.joy = joy;

@@ -1,40 +1,38 @@
 package org.frc1058.robot.commands
 
-import edu.wpi.first.wpilibj.command.Command;
-import org.frc1058.robot.subsystems.GearManipulator;
-import org.frc1058.robot.RobotMap;
+import edu.wpi.first.wpilibj.command.Command
+import org.frc1058.robot.subsystems.GearManipulator
+import org.frc1058.robot.RobotMap
 
-public class PivotGearIntake : Command {
+class PivotGearIntake(setpoint: Double, voltage: Double = 6.0) : Command() {
 	
-	var maxVoltage: Double = 0.0;
-	var intakeSetpoint: Double = 0.0;
-	var onTarget: Boolean = false;
+	var maxVoltage: Double = voltage
+    var intakeSetpoint: Double = setpoint
+    var onTarget: Boolean = false
+
+	override fun initialize() {
+		GearManipulator.setMaxIntakeSpeed(maxVoltage)
+    }
 	
-	public constructor(setpoint: Double, voltage: Double = 6.0){
-		requires(GearManipulator);
-    	maxVoltage = voltage;
-    	intakeSetpoint = setpoint;
+	override fun execute() {
+		if(GearManipulator.pivotMotor.position < intakeSetpoint-RobotMap.DRIVEBASE_POSITION_TOLERANCE && GearManipulator.pivotMotor.position > intakeSetpoint+RobotMap.DRIVEBASE_POSITION_TOLERANCE){
+    		onTarget = true
+        }
 	}
 	
-	override protected fun initialize() {
-		GearManipulator.setMaxIntakeSpeed(maxVoltage);
-	}
+	override fun isFinished(): Boolean {
+		 return onTarget
+    }
 	
-	override protected fun execute() {
-		if(GearManipulator.pivotMotor.getPosition() < intakeSetpoint-RobotMap.DRIVEBASE_POSITION_TOLERANCE && GearManipulator.pivotMotor.getPosition() > intakeSetpoint+RobotMap.DRIVEBASE_POSITION_TOLERANCE){
-    		onTarget = true;
-    	}
-	}
-	
-	override protected fun isFinished(): Boolean {
-		 return onTarget;
-	}
-	
-	override protected fun end() {
+	override fun end() {
 		
     }
 	
-	override protected fun interrupted() {
+	override fun interrupted() {
 		
     }
+
+	init {
+		requires(GearManipulator)
+	}
 }

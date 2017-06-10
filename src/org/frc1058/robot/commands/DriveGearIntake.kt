@@ -1,33 +1,29 @@
 package org.frc1058.robot.commands
 
-import edu.wpi.first.wpilibj.command.Command;
-import org.frc1058.robot.subsystems.GearManipulator;
+import edu.wpi.first.wpilibj.command.Command
+import org.frc1058.robot.subsystems.GearManipulator
 
 
-public class DriveGearIntake: Command {
+class DriveGearIntake(speed: Double) : Command() {
 	
-	var rollerSpeed: Double = 0.0;
-	
-	public constructor(speed: Double){
-		rollerSpeed = speed;
+	var rollerSpeed: Double = speed
+
+	override fun initialize() {
 	}
 	
-	override protected fun initialize() {
-	}
-	
-	override protected fun execute() {
-		GearManipulator.setRollerSpeed(rollerSpeed);
-	}
-	
-	override protected fun isFinished(): Boolean {
-		 return false;
-	}
-	
-	override protected fun end() {
-		GearManipulator.setRollerSpeed(0.0);
+	override fun execute() {
+		GearManipulator.setRollerSpeed(rollerSpeed)
     }
 	
-	override protected fun interrupted() {
-		GearManipulator.setRollerSpeed(0.0);
+	override fun isFinished(): Boolean {
+		 return false
+    }
+	
+	override fun end() {
+		GearManipulator.setRollerSpeed(0.0)
+    }
+	
+	override fun interrupted() {
+		GearManipulator.setRollerSpeed(0.0)
     }
 }

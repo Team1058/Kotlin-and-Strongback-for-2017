@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Strongback">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/strongback/java/lib/strongback.jar!/" />
+      <root url="jar://$USER_HOME$/strongback/java/lib-tests/strongback-testing.jar!/" />
+      <root url="jar://$USER_HOME$/strongback/java/lib-tests/fest-assert-1.4.jar!/" />
+      <root url="jar://$USER_HOME$/strongback/java/lib-tests/fest-util-1.1.6.jar!/" />
+      <root url="jar://$USER_HOME$/strongback/java/lib-tests/hamcrest-core-1.3.jar!/" />
+      <root url="jar://$USER_HOME$/strongback/java/lib-tests/junit-4.11.jar!/" />
+      <root url="jar://$USER_HOME$/strongback/java/lib-tests/metrics-core-3.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
