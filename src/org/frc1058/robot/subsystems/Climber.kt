@@ -2,8 +2,8 @@ package org.frc1058.robot.subsystems
 
 import com.ctre.CANTalon
 import edu.wpi.first.wpilibj.command.Subsystem
-import org.frc1058.robot.RobotMap
 import org.frc1058.robot.OI
+import org.frc1058.robot.RobotMap
 
 object Climber : Subsystem(){
 	
